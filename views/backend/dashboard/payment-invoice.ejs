@@ -1,0 +1,240 @@
+﻿<%- include("../../includes/dash/head", {userInfo:userInfo}); -%>
+                <div class="pcoded-content">
+                    <div class="pcoded-inner-content">
+                        <!-- Main-body start -->
+                        <div class="main-body">
+                            <div class="page-wrapper">
+
+                                    <!-- Page body start -->
+                                    <div class="page-body">
+                                        <!-- Container-fluid starts -->
+                                        <div class="container">
+                                            <!-- Main content starts -->
+                                            <div>
+                                                <!-- Invoice card start -->
+                                                <div class="card">
+                                                    <div style="margin: 40px;" class="row ">
+                                                        <div  class="col-md-6">
+                                                            <img src="..\dash-assets\assets\images\logo-blue.png" class="m-b-10" alt="">
+                                                           
+                                                        </div>
+                                                        <div style="margin: auto; margin-top: 40px;" class="col-md-6">
+                                                            <button  type="button" class="btn btn-primary btn-outline-primary btn-block alert-prompt m-b-10" onclick=""><i class="icofont icofont-user-alt-3"></i>Buy Again</button>
+                                                            
+
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <div class="row invoive-info">
+                                                            <div class="col-md-3 col-xs-12 invoice-client-info">
+                                                                <h6>Client Information :</h6>
+                                                                <h6 class="m-0"><%= userInfo.firstname+ " " +userInfo.lastname%></h6>
+                                                                <p class="m-0 m-t-10">123 6th St. Melbourne, FL 32904 West Chicago, IL 60185</p>
+                                                                <p class="m-0">(1234) - 567891</p>
+                                                                <p><a href="..\..\..\cdn-cgi\l\email-protection.htm" class="__cf_email__" data-cfemail="eb8f8e8684ab939291c5888486">[email&#160;protected]</a></p>
+                                                            </div>
+                                                            <div class="col-md-6 col-sm-6">
+                                                                <h6>Order Information :</h6>
+                                                                <table class="table table-responsive invoice-table invoice-order table-borderless">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th>Date :</th>
+                                                                            <td><%= planInfo.create_date%></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>Status :</th>
+                                                                            <td>
+                                                                                <span class="label label-warning"><%=planInfo.Status %></span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>Id :</th>
+                                                                            <td>
+                                                                                <%= planInfo.ident%>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>Phone Number :</th>
+                                                                            <td>
+                                                                                <%= planInfo.mobile_number%>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="col-md-3 col-sm-6">
+                                                                <h6>Plan Information :</h6>
+                                                                <table class="table table-responsive invoice-table invoice-order table-borderless">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th>Network :</th>
+                                                                            <td><%= planInfo.plan_network%></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>Size :</th>
+                                                                            <td>
+                                                                                <span class="label label-warning"><%=planInfo.plan_name %></span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>Duration :</th>
+                                                                            <td>
+                                                                                <%= planInfo.duration%>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>Phone :</th>
+                                                                            <td>
+                                                                                <%= planInfo.mobile_number%>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                       
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <table class="table table-responsive invoice-table invoice-total">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th>Sub Total :</th>
+                                                                            <td>₦<%= amount%>.00</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>Point (1.5%) :</th>
+                                                                            <td>10</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>Discount (5%) :</th>
+                                                                            <td>$4.00</td>
+                                                                        </tr>
+                                                                        <tr class="text-info">
+                                                                            <td>
+                                                                                <hr>
+                                                                                <h5 class="text-primary">Total :</h5>
+                                                                            </td>
+                                                                            <td>
+                                                                                <hr>
+                                                                                <h5 class="text-primary">₦<%= amount%>.00</h5>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <h6>Terms And Condition :</h6>
+                                                                <p>lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Invoice card end -->
+                                                <div class="row text-center">
+                                                    <div class="col-sm-12 invoice-btn-group text-center">
+                                                        <button type="button" class="btn btn-primary btn-print-invoice m-b-10 btn-sm waves-effect waves-light m-r-20">Print</button>
+                                                        <button type="button" class="btn btn-danger waves-effect m-b-10 btn-sm waves-light">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Container ends -->
+                                    </div>
+                                    <!-- Page body end -->
+                                </div>
+                            </div>
+                            <!-- Warning Section Starts -->
+
+                            <div id="styleSelector">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Older IE warning message -->
+    <!--[if lt IE 10]>
+<div class="ie-warning">
+    <h1>Warning!!</h1>
+    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+    <div class="iew-container">
+        <ul class="iew-download">
+            <li>
+                <a href="http://www.google.com/chrome/">
+                    <img src="../dash-assets/assets/images/browser/chrome.png" alt="Chrome">
+                    <div>Chrome</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.mozilla.org/en-US/firefox/new/">
+                    <img src="../dash-assets/assets/images/browser/firefox.png" alt="Firefox">
+                    <div>Firefox</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.opera.com">
+                    <img src="../dash-assets/assets/images/browser/opera.png" alt="Opera">
+                    <div>Opera</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.apple.com/safari/">
+                    <img src="../dash-assets/assets/images/browser/safari.png" alt="Safari">
+                    <div>Safari</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                    <img src="../dash-assets/assets/images/browser/ie.png" alt="">
+                    <div>IE (9 & above)</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <p>Sorry for the inconvenience!</p>
+</div>
+<![endif]-->
+    <!-- Warning Section Ends -->
+    <!-- Required Jquery -->
+    <script data-cfasync="false" src="..\..\..\cdn-cgi\scripts\5c5dd728\cloudflare-static\email-decode.min.js"></script><script type="text/javascript" src="..\dash-assets\bower_components\jquery\js\jquery.min.js"></script>
+    <script type="text/javascript" src="..\dash-assets\bower_components\jquery-ui\js\jquery-ui.min.js"></script>
+    <script type="text/javascript" src="..\dash-assets\bower_components\popper.js\js\popper.min.js"></script>
+    <script type="text/javascript" src="..\dash-assets\bower_components\bootstrap\js\bootstrap.min.js"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="..\dash-assets\bower_components\jquery-slimscroll\js\jquery.slimscroll.js"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="..\dash-assets\bower_components\modernizr\js\modernizr.js"></script>
+    <script type="text/javascript" src="..\dash-assets\bower_components\modernizr\js\css-scrollbars.js"></script>
+
+    <!-- i18next.min.js -->
+    <script type="text/javascript" src="..\dash-assets\bower_components\i18next\js\i18next.min.js"></script>
+    <script type="text/javascript" src="..\dash-assets\bower_components\i18next-xhr-backend\js\i18nextXHRBackend.min.js"></script>
+    <script type="text/javascript" src="..\dash-assets\bower_components\i18next-browser-languagedetector\js\i18nextBrowserLanguageDetector.min.js"></script>
+    <script type="text/javascript" src="..\dash-assets\bower_components\jquery-i18next\js\jquery-i18next.min.js"></script>
+    <!-- Custom js -->
+
+    <script src="..\dash-assets\assets\js\pcoded.min.js"></script>
+    <script src="..\dash-assets\assets\js\vartical-layout.min.js"></script>
+    <script src="..\dash-assets\assets\js\jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="..\dash-assets\assets\js\script.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+</body>
+
+</html>

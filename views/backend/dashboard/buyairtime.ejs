@@ -1,0 +1,434 @@
+<%- include("../../includes/dash/head", {userInfo:userInfo}); -%>
+
+<style>
+        .monnify {
+       width: 15%;
+       display: block;
+       margin-top: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        /* display: none; */
+    }
+    .balance {
+        display: none;
+    }
+    .wallet {
+        display: none;
+    }
+    /* .monnify {
+        display: none;
+    }
+    .transfer {
+        display: none;
+    } */
+   
+</style>
+
+<script>
+    var url = window.location.href;
+    var arr = url.split("/");
+    // alert(arr.slice(3));
+    const netw = arr[4];
+    // alert(netw);
+    var bgc = "#FFC403";
+    // const bgColor = '';
+    // const textColor = '';
+    if(netw === "AIRTEL"){
+        // alert(netw);
+        bgColor = '#F0232C';
+        textColor = 'white';
+    }else if (netw === "MTN"){
+        // alert(newt)
+        bgColor = '#FFC403';
+        textColor = 'black';
+    }else if (netw === "9Mobile"){
+        bgColor = '#015E43';
+        textColor = 'white';
+    }else if (netw === "GLO"){
+        bgColor = '#27883B';
+        textColor = 'white';
+    }
+    // const padding = '20px';
+
+    const style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = `
+        input[type="text"]:disabled {
+            background-color: ${bgColor};
+            color: ${textColor};
+            font-weight: 700;
+            font-size: larger;
+            }
+            .bsize {
+                background-color: black;
+                color: white;
+            }
+    `;
+    document.head.appendChild(style);
+</script>
+
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- Main-body start -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- Page-header start -->
+                <div class="page-header">
+                    <div class="row align-items-end">
+                        <div class="col-lg-8">
+                            <div class="page-header-title">
+                                <div class="d-inline">
+                                    <h4>Buy Airtime</h4>
+                                    <span>Select the network you wish to purchase airtime for</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="page-header-breadcrumb">
+                                <ul class="breadcrumb-title">
+                                    <li class="breadcrumb-item">
+                                        <a href="index-1.htm">  </a>
+                                    </li>
+                                   <button class="btn btn-primary"> <i class="feather icon-home"></i>Bulk Transactions</button>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page-header end -->
+
+                <!-- Page body start -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <!-- Basic Form Inputs card start -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <!-- <h5>Buy Mobile Data</h5> -->
+                                    <!-- <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span> -->
+                                     
+
+
+                                    <div class="card-header-right">
+                                        <i class="icofont icofont-spinner-alt-5"></i>
+                                    </div>
+
+                                </div>
+                                <!-- My Form -->
+                                <div class="row">
+                                    <div class="col-sm-12 col-lg-8">
+                                        <div class="card-block">
+                                            <h4 class="sub-title">Load Data Infomations</h4>
+                                            <form id="swaForm" method="post" action="/airtime">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Select Box</label>
+                                                    <div class="col-sm-10">
+                                                        <select  name="network" class="form-control form-bg-primary" required>
+                                                            <option disabled selected value="opt1">Select Network</option>
+                                                            <option value="1">MTN</option>
+                                                            <option value="3">AIRTEL</option>
+                                                            <option value="2">GLO</option>
+                                                            <option value="6">9 MOBILE</option>
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" value="Airtime Purchase" name="paymentDesc">
+                                                
+                                                
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Phone Number</label>
+                                                    <div class="col-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="icofont icofont-phone"></i></span>
+                                                            <input type="text" class="form-control form-control-round" name="phone" value="08160278321" required>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                   
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Amount</label>
+                                                    <div class="col-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">₦</span>
+                                                            <input type="text" class="form-control form-control-round" name="amount" value="" placeholder="0.0" >
+                                                        </div>
+                                                       
+                                                    </div>
+                                                   
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Payment Medium</label>
+                                                    <div class="col-sm-10">
+                                                        <select id="paymed" name="select" class="form-control form-control-round">
+                                                            <option value="" disabled selected class="description">Topup Medium</option>
+                                                            <option value="wallet">Main Wallet</option>
+                                                            <option value="monnify">Credit Card</option>
+                                                            <option value="transfer">Bank Transfer</option> 
+                                                            
+                                                        </select>
+                                                        <div class="balance" style="background-color: rgba(27, 191, 27, 0.496); color: white; text-align: left; width: 30%; border-radius: 12, 12, 12, 12;
+                                                        ">
+                                                            <p style="margin-left: 20px; font-weight: 600; font-size: 15px;">₦ <%= userInfo.wallet_balace.toLocaleString()%></p>
+                                                        </div>
+                                                        <!-- <div style="background-color: rgba(191, 43, 27, 0.729); color: white; text-align: left; width: 20%; border-radius: 12, 12, 12, 12;
+                                                        ">
+                                                            <p style="margin-left: 20px; font-weight: 600;">₦ 400,000</p>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Amount</label>
+                                                    <div class="col-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="icofont icofont-queen"></i></span>
+                                                            <input type="text" class="form-control" placeholder="0.0" >
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                                <div class="form-group row">
+                                                    <!-- <div class="col-sm-6">
+                                                    <button  type="button" class="  col-form-label btn btn-primary btn-outline-primary btn-block alert-prompt m-b-10" onclick="mypull('4474.a44');"><i class="icofont icofont-user-alt-3">
+                                                    </i>Pay from Wallet (N 50,000)</button>
+                                                    </div> -->
+                                                     <!--WALLET PAYMENT  -->
+                                                    <div class="col-sm-12 wallet" >
+                                                        <button type="button" class="btn btn-primary btn-outline-primary btn-block alert-prompt m-b-10 paymentbtn" onclick="mypull('<%=userInfo.trans_pin %>');"><i class="icofont icofont-user-alt-3">
+                                                                <!-- <input class="subaction" type="hidden" name="actions" value="wallet"> -->
+                                                        </i>Pay with Wallet</button>
+                                                        <img class="monnify" src="../dash-assets/assets/images/monnify.png" alt="monnify">
+                                                    </div>
+                                                        <!--MONNNIFY PAYMENT  -->
+                                                    <!-- <div class="col-sm-12 monnify" >
+                                                        <button name="action" value="tomonnify" type="button" class="btn btn-primary btn-outline-primary btn-block alert-prompt m-b-10" onclick="mypull('4474.a44');"><i class="icofont icofont-user-alt-3">
+
+                                                        </i>Pay with Monnify (1.65% fee)</button>
+                                                    </div> -->
+                                                    <!-- BANK TRANSFER -->
+                                                    <!-- <div class="col-sm-12 transfer" >
+                                                        <button name="action" value="totransfer" type="button" class="btn btn-primary btn-outline-primary btn-block alert-prompt m-b-10" onclick="mypull('4474.a44');"><i class="icofont icofont-user-alt-3">
+
+                                                        </i>Bank Transfer (2% fee)</button>
+                                                    </div> -->
+                                                </div>
+
+                                                
+                                                <!-- <button class="btn btn-primary btn-outline-primary btn-block"><i class="icofont icofont-user-alt-3"></i>Make Payment</button> -->
+                                                     
+                                            </form>
+                                            
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <p>Advert goes here !!!</p>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                    </div>
+                </div>
+            </div>
+            <!-- Page body end -->
+        </div>
+    </div>
+    <!-- Main-body end -->
+    <div id="styleSelector">
+
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+    $(document).ready(function() {
+            // Listen for changes in the dropdown
+            $('#paymed').change(function() {
+                // Get the selected value
+                const selectedValue = $(this).val();
+
+                // Hide all divs initially
+                // $('.balance').hide();
+                // $('.wallet').hide();
+                // $('.monnify').hide();
+                // $('.transfer').hide();
+
+                // Show the selected div
+                if (selectedValue === "wallet") {
+                    // $('#' + selectedValue).show();
+                    $('.monnify').hide();
+                    $('.balance').show();
+                    $('.wallet').show();
+                    $('.paymentbtn').text('Pay with Wallet');
+                    // $('.paymentbtn').val('towallet');
+                    
+                    
+                }else if (selectedValue === "monnify"){
+                    $('.balance').hide();
+                    $('.wallet').show();
+                    $('.paymentbtn').text('Pay with Monnify (1.65% fee)');
+                    $('.monnify').show();
+                    // $('.paymentbtn').val('tomonnify');
+                    
+                    $('#swaForm').attr('action', '/monnify-pay');
+
+                    
+                }else if (selectedValue === "transfer"){
+                    $('.monnify').hide();
+                    $('.wallet').show();
+                    $('.balance').hide();
+                    $('.paymentbtn').text('Bank Transfer (2% fee)');
+                    // $('.paymentbtn').val('tobank');
+                    // $('.transfer').show();
+                }
+            });
+        });
+
+</script>
+
+
+
+<!-- Warning Section Starts -->
+<!-- Older IE warning message -->
+<!--[if lt IE 10]>
+<div class="ie-warning">
+<h1>Warning!!</h1>
+<p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers
+to access this website.</p>
+<div class="iew-container">
+<ul class="iew-download">
+<li>
+<a href="http://www.google.com/chrome/">
+    <img src="../dash-assets/assets/images/browser/chrome.png" alt="Chrome">
+    <div>Chrome</div>
+</a>
+</li>
+<li>
+<a href="https://www.mozilla.org/en-US/firefox/new/">
+    <img src="../dash-assets/assets/images/browser/firefox.png" alt="Firefox">
+    <div>Firefox</div>
+</a>
+</li>
+<li>
+<a href="http://www.opera.com">
+    <img src="../dash-assets/assets/images/browser/opera.png" alt="Opera">
+    <div>Opera</div>
+</a>
+</li>
+<li>
+<a href="https://www.apple.com/safari/">
+    <img src="../dash-assets/assets/images/browser/safari.png" alt="Safari">
+    <div>Safari</div>
+</a>
+</li>
+<li>
+<a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+    <img src="../dash-assets/assets/images/browser/ie.png" alt="">
+    <div>IE (9 & above)</div>
+</a>
+</li>
+</ul>
+</div>
+<p>Sorry for the inconvenience!</p>
+</div>
+<![endif]-->
+<!-- Warning Section Ends -->
+<!-- Required Jquery -->
+ 
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- Warning Section Starts -->
+<!-- Older IE warning message -->
+<!--[if lt IE 10]>
+<div class="ie-warning">
+    <h1>Warning!!</h1>
+    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers
+        to access this website.</p>
+    <div class="iew-container">
+        <ul class="iew-download">
+            <li>
+                <a href="http://www.google.com/chrome/">
+                    <img src="../dash-assets/assets/images/browser/chrome.png" alt="Chrome">
+                    <div>Chrome</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.mozilla.org/en-US/firefox/new/">
+                    <img src="../dash-assets/assets/images/browser/firefox.png" alt="Firefox">
+                    <div>Firefox</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.opera.com">
+                    <img src="../dash-assets/assets/images/browser/opera.png" alt="Opera">
+                    <div>Opera</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.apple.com/safari/">
+                    <img src="../dash-assets/assets/images/browser/safari.png" alt="Safari">
+                    <div>Safari</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                    <img src="../dash-assets/assets/images/browser/ie.png" alt="">
+                    <div>IE (9 & above)</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <p>Sorry for the inconvenience!</p>
+</div>
+<![endif]-->
+    <!-- Warning Section Ends -->
+    <!-- Required Jquery -->
+    <script type="text/javascript" src="..\dash-assets\bower_components\jquery\js\jquery.min.js"></script>
+    <script type="text/javascript" src="..\dash-assets\bower_components\jquery-ui\js\jquery-ui.min.js"></script>
+    <script type="text/javascript" src="..\dash-assets\bower_components\popper.js\js\popper.min.js"></script>
+    <script type="text/javascript" src="..\dash-assets\bower_components\bootstrap\js\bootstrap.min.js"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="..\dash-assets\bower_components\jquery-slimscroll\js\jquery.slimscroll.js"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="..\dash-assets\bower_components\modernizr\js\modernizr.js"></script>
+    <script type="text/javascript" src="..\dash-assets\bower_components\modernizr\js\css-scrollbars.js"></script>
+
+    <!-- sweet alert js -->
+    <script type="text/javascript" src="..\dash-assets\bower_components\sweetalert\js\sweetalert.min.js"></script>
+    <script type="text/javascript" src="..\dash-assets\assets\js\modal.js"></script>
+    <!-- sweet alert modal.js intialize js -->
+    <!-- modalEffects js nifty modal window effects -->
+    <script type="text/javascript" src="..\dash-assets\assets\js\modalEffects.js"></script>
+    <script type="text/javascript" src="..\dash-assets\assets\js\classie.js"></script>
+    <!-- i18next.min.js -->
+    <script type="text/javascript" src="..\dash-assets\bower_components\i18next\js\i18next.min.js"></script>
+    <script type="text/javascript" src="..\dash-assets\bower_components\i18next-xhr-backend\js\i18nextXHRBackend.min.js"></script>
+    <script type="text/javascript" src="..\dash-assets\bower_components\i18next-browser-languagedetector\js\i18nextBrowserLanguageDetector.min.js"></script>
+    <script type="text/javascript" src="..\dash-assets\bower_components\jquery-i18next\js\jquery-i18next.min.js"></script>
+    <script src="..\dash-assets\assets\js\pcoded.min.js"></script>
+    <script src="..\dash-assets\assets\js\vartical-layout.min.js"></script>
+    <script src="..\dash-assets\assets\js\jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- Custom js -->
+    <script type="text/javascript" src="..\dash-assets\assets\js\script.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+</body>
+
+</html>

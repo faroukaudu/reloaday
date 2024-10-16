@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="text-align: center;">
+    <form action="/dataplan" method="post">
+        <input type="text" placeholder="bundle code" name="bcode">
+        <input type="text" placeholder="network name" name="nname">
+        <input type="text" placeholder="btype" name="btype">
+        <input type="text" placeholder="size" name="bsize">
+        <input type="text" placeholder="duration" name="dur">
+        <input type="text" placeholder="amount" name="amount">
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    <div>
+        <% if(plans.length == 0){ %>
+            <p>No Plans added yet</p>
+        <% }else{ %>
+            
+           
+            <% plans.forEach(function(plan, index){ %>
+            <div style="display: flex; justify-content:space-around;
+            padding: 15px; margin-bottom: -50px;">
+            <p><%= index + 1 %></p>
+            <p><%= plan.bundleCode %></p>
+            <p><%= plan.networkName %></p>
+            <p><%= plan.bundleType %></p>
+            <p><%= plan.bundleSize %></p>
+            <p><%= plan.bundleDuration %></p>
+            <p style="color: green; font-size: larger;
+            font-weight: 900;"><%= plan.amount %></p>
+            </div>
+            <% }) %>
+            
+
+
+        <% } %>
+    </div>
+</body>
+</html>

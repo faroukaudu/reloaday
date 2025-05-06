@@ -26,7 +26,7 @@ app.post("/webhook", async (req,res)=>{
       userEmail:webhookData.eventData.customer.email,
 
     };
-    User.findOne({username:webhookData.eventData.customer.email}).then((userFound)=>{
+    User.findOne({username:_.capitalize(webhookData.eventData.customer.email)}).then((userFound)=>{
       console.log("User Found & the name is "+ userFound);
       if(web2DB.paymentStatus === "PAID"){
         userFound.transactions.push(web2DB);
@@ -40,7 +40,7 @@ app.post("/webhook", async (req,res)=>{
       }
       
     }).catch((err)=>{
-      console.log(err);
+      console.log("NO Userfound "+ err);
       
     })
     // console.log("my grabbed Info =>> "+ JSON.stringify(web2DB));

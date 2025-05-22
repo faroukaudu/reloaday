@@ -30,7 +30,10 @@ app.post("/webhook", async (req,res)=>{
       console.log("User Found & the name is "+ userFound);
       if(web2DB.paymentStatus === "PAID"){
         userFound.transactions.push(web2DB);
-        userFound.wallet_balace = userFound.wallet_balace + webhookData.eventData.amountPaid;
+        const percut = 1.65/101.65;
+        const cut = webhookData.eventData.amountPaid * percut;
+
+        userFound.wallet_balace = userFound.wallet_balace + (webhookData.eventData.amountPaid-cut);
       userFound.save();
       console.log("Saved to DB");
       

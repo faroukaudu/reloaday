@@ -69,7 +69,7 @@ app.post("/register", function(req, res){
            
             // setTimeout(function() {
               // res.redirect("/sign-in");
-              res.send("User Registered");
+             res.redirect("/sign-in");
             //   res.render("my-account",{cookies:req.session});
             //   welcomeEmail({username:req.body.firstname, email:req.body.username});
             // }, 2000);

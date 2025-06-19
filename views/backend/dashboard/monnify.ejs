@@ -32,7 +32,7 @@
                                                     <input type="hidden" value="Funding Wallet" name="paymentDesc">
                                                     <div class="row" >
                                                         <p class="col-sm-12 col-lg-10">Transaction Charges </p> 
-                                                        <p class="col-sm-12 col-lg-2" style="font-size: medium;" >1.65%</p>
+                                                        <p class="col-sm-12 col-lg-2" style="font-size: medium;" >0.0%</p>
                                                         
                                                     </div>
                                                     <hr>
@@ -85,7 +85,7 @@
                 // Get the current value of the input field
                 const inputValue = $(this).val();
                 const amtC = Number(inputValue);
-                const total = ((amtC/100) * 1.65) + amtC;
+                const total = amtC;
 
                 // Update the text in the display div
                 $('.perc').text("₦"+total.toLocaleString());

@@ -19,9 +19,9 @@ const Anonymous = mongoose.model("Anony",anonymousInfoSchema);
 
 app.post("/quickairtime", async (req,res)=>{
     
-      var amount = (Number(req.body.amount) / 100) * 1.65;
+      var amount = (req.body.amount) 
       // Total Amount
-      var tAmount = Number(req.body.amount) + amount;
+      var tAmount = Number(req.body.amount);
       // Round to 2 decimal point
       let roundedAmt = parseFloat(tAmount).toFixed(2);
       console.log("Amount to Pay "+roundedAmt );

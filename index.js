@@ -59,8 +59,8 @@ app.use(session({
 
 
 //   DB connection link
-  const uri = "mongodb://127.0.0.1:27017/topit";
-// const uri = "mongodb+srv://Topit:"+process.env.MYMAINDBPASS+"@topit.qa7wgxv.mongodb.net/?retryWrites=true&w=majority&appName=topit";
+  // const uri = "mongodb://127.0.0.1:27017/topit";
+const uri = "mongodb+srv://Topit:"+process.env.MYMAINDBPASS+"@topit.qa7wgxv.mongodb.net/?retryWrites=true&w=majority&appName=topit";
 database().catch(err => console.log(err));
 
 

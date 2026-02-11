@@ -213,3 +213,16 @@ function createPin () {
     
 };
 
+function dangerOpenLink(title, message, url) {
+  swal({
+    title: title || "Notice",
+    text: message || "",
+    type: "error",              // or "warning"
+    confirmButtonText: "Top Up",
+    closeOnConfirm: true
+  }, function () {
+    // ✅ runs when OK is clicked
+    window.location.href = url;          // same tab
+    // window.open(url, "_blank");       // new tab instead
+  });
+}

@@ -27,6 +27,7 @@ const paymentInfoSchema = new mongoose.Schema({
     date:String,
     paymentMeth:String,
     token:String,
+    checkoutMode:String,
 });
 
 

@@ -13,7 +13,10 @@ const anonymousInfoSchema = new mongoose.Schema({
   userDelivery:Boolean,
   phone:String,
   network:String,
-  email:String
+  email:String,
+  successful:Boolean,
+  type:String,
+  plan:String,
   
 
  

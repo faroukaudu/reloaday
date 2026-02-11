@@ -1,23 +1,24 @@
 ﻿<%- include("../../includes/dash/head", {userInfo:userInfo}); -%>
-<style>
-    .monnify {
-       width: 10%;
-       display: block;
-       margin-top: 40px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-</style>
+    <style>
+        .monnify {
+            width: 10%;
+            display: block;
+            margin-top: 40px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
 
-<div class="pcoded-content">
-    <div class="pcoded-inner-content">
-        <div class="main-body">
-            <div class="page-wrapper">
-                <div class="page-body">
-                   
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <div class="page-body">
+
 
                         <!-- widget-statstic start -->
-                        <div class="card">
+                        <!-- FORMER MONIFY>>>>>>>>>>>>>>>> -->
+                        <!-- <div class="card">
                             <div class="card-block">
                                 <div class="row">
                                     <div class="col-sm-6 col-lg-8">
@@ -53,47 +54,177 @@
                                 </div>
                             </div>
 
+                        </div> -->
+                        <!-- Single Open Accordion start -->
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-header-text">Fund Wallet</h5>
+                                </div>
+                                <div class="card-block accordion-block">
+                                    <div class="accordion-box text-center" id="single-open" >
+                                        <a class="accordion-msg sub-title text-center">Fund account with <span style="font-weight: 800;"> NOMBA</span> (CARD / BANK
+                                            TRANSFER)</a>
+                                        <div class="accordion-desc">
+                                            <div class="card-block">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-sm-6 col-lg-8">
+                                                        <!-- <h4 class="sub-title">Fund account with Monnify(ATM / BANK TRANSFER)</h4> -->
+                                                        <form action="/nomba-pay" method="post" class="text-center">
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <div class="input-group input-group-lg">
+                                                                        <span class="input-group-addon"
+                                                                            id="basic-addon6">₦</span>
+                                                                        <input type="text" class="form-control amount"
+                                                                            name="amount" placeholder="0.00" required>
+                                                                    </div>
+                                                                    <input type="hidden" value="Funding Wallet"
+                                                                        name="paymentDesc">
+                                                                    <div class="row">
+                                                                        <p class="col-sm-12 col-lg-10">Transaction
+                                                                            Charges </p>
+                                                                        <p class="col-sm-12 col-lg-2"
+                                                                            style="font-size: medium;">0.0%</p>
+
+                                                                    </div>
+                                                                    <hr>
+                                                                    <div class="row m-b-20">
+                                                                        <p class="col-sm-12 col-lg-10"
+                                                                            style="font-size:small; font-weight: 600;">
+                                                                            TOTAL </p>
+                                                                        <p class=" perc col-sm-12 col-lg-2"
+                                                                            style="font-size: large; color: green; font-weight: 600;">
+                                                                            0</p>
+
+                                                                    </div>
+                                                                    <button
+                                                                        class="btn btn-primary btn-outline-primary btn-block"><i
+                                                                            class="icofont icofont-user-alt-3"></i>Fund
+                                                                        Wallet</button>
+                                                                    <img class="monnify"
+                                                                        src="../dash-assets/assets/images/nomba-logo.png"
+                                                                        alt="nomba">
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a class="accordion-msg sub-title text-center">Fund account with Monnify (CARD / BANK
+                                            TRANSFER)</a>
+                                        <div class="accordion-desc">
+                                            <div class="card-block">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-sm-6 col-lg-8">
+                                                        <!-- <h4 class="sub-title">Fund account with Monnify(ATM / BANK TRANSFER)</h4> -->
+                                                        <form action="/monnify-pay" method="post" class="text-center">
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <div class="input-group input-group-lg">
+                                                                        <span class="input-group-addon"
+                                                                            id="basic-addon6">₦</span>
+                                                                        <input type="text" class="form-control amount"
+                                                                            name="amount" placeholder="0.00" required>
+                                                                    </div>
+                                                                    <input type="hidden" value="Funding Wallet"
+                                                                        name="paymentDesc">
+                                                                    <div class="row">
+                                                                        <p class="col-sm-12 col-lg-10">Transaction
+                                                                            Charges </p>
+                                                                        <p class="col-sm-12 col-lg-2"
+                                                                            style="font-size: medium;">0.0%</p>
+
+                                                                    </div>
+                                                                    <hr>
+                                                                    <div class="row m-b-20">
+                                                                        <p class="col-sm-12 col-lg-10"
+                                                                            style="font-size:small; font-weight: 600;">
+                                                                            TOTAL </p>
+                                                                        <p class=" perc col-sm-12 col-lg-2"
+                                                                            style="font-size: large; color: green; font-weight: 600;">
+                                                                            0</p>
+
+                                                                    </div>
+                                                                    <button
+                                                                        class="btn btn-primary btn-outline-primary btn-block"><i
+                                                                            class="icofont icofont-user-alt-3"></i>Fund
+                                                                        Wallet</button>
+                                                                    <img class="monnify"
+                                                                        src="../dash-assets/assets/images/monnify.png"
+                                                                        alt="monnify">
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a class="accordion-msg">Lorem Message 3</a>
+                                        <div class="accordion-desc">
+                                            <p>
+                                                Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                industry. Lorem Ipsum has been the industry's standard dummy text ever
+                                                since the 1500s, when an unknown printer took a galley of type and
+                                                scrambled it to make a type specimen book. It has
+                                                survived not only five centuries, but also the leap into electronic
+                                                typesetting, remaining essentially unchanged. It was popularised in the
+                                                1960s with the release of Letraset sheets containing
+                                                Lorem Ipsum passages, and more .
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        
-                       
-                        
+                        <!-- Single Open Accordion ends -->
+
+
+
                         <!-- widget-statstic end -->
-                       
 
-                       
 
-                   
+
+
+
+                    </div>
                 </div>
-            </div>
 
-            <div id="styleSelector">
+                <div id="styleSelector">
 
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
-</div>
-</div>
+    </div>
+    </div>
+    </div>
+    </div>
 
 
-<script>
-    $(document).ready(function() {
+    <script>
+        $(document).ready(function () {
             // Listen for input event on the form input field
-            $('.amount').on('input', function() {
+            $('.amount').on('input', function () {
                 // Get the current value of the input field
                 const inputValue = $(this).val();
                 const amtC = Number(inputValue);
                 const total = amtC;
 
                 // Update the text in the display div
-                $('.perc').text("₦"+total.toLocaleString());
+                $('.perc').text("₦" + total.toLocaleString());
             });
         });
 
 
-</script>
+    </script>
 
     <!-- Warning Section Starts -->
     <!-- Older IE warning message -->
@@ -146,17 +277,19 @@
     <script type="text/javascript" src="..\dash-assets\bower_components\popper.js\js\popper.min.js"></script>
     <script type="text/javascript" src="..\dash-assets\bower_components\bootstrap\js\bootstrap.min.js"></script>
     <!-- jquery slimscroll js -->
-    <script type="text/javascript" src="..\dash-assets\bower_components\jquery-slimscroll\js\jquery.slimscroll.js"></script>
+    <script type="text/javascript"
+        src="..\dash-assets\bower_components\jquery-slimscroll\js\jquery.slimscroll.js"></script>
     <!-- modernizr js -->
     <script type="text/javascript" src="..\dash-assets\bower_components\modernizr\js\modernizr.js"></script>
     <script type="text/javascript" src="..\dash-assets\bower_components\modernizr\js\css-scrollbars.js"></script>
-        <!-- notification js -->
-        <script type="text/javascript" src="..\dash-assets\assets\js\bootstrap-growl.min.js"></script>
-        <script type="text/javascript" src="..\dash-assets\assets\pages\notification\notification.js"></script>
+    <!-- notification js -->
+    <script type="text/javascript" src="..\dash-assets\assets\js\bootstrap-growl.min.js"></script>
+    <script type="text/javascript" src="..\dash-assets\assets\pages\notification\notification.js"></script>
     <!-- Chart js -->
     <script type="text/javascript" src="..\dash-assets\bower_components\chart.js\js\Chart.js"></script>
     <!-- Google map js -->
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script
+        src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
     <script type="text/javascript" src="..\dash-assets\assets\pages\google-maps\gmaps.js"></script>
     <!-- gauge js -->
@@ -166,35 +299,36 @@
     <script src="..\dash-assets\assets\pages\widget\amchart\gauge.js"></script>
     <script src="..\dash-assets\assets\pages\widget\amchart\pie.js"></script>
     <script src="..\dash-assets\assets\pages\widget\amchart\light.js"></script>
+    <script type="text/javascript" src="..\dash-assets\assets\pages\accordion\accordion.js"></script>
     <!-- Custom js -->
     <script src="..\dash-assets\assets\js\pcoded.min.js"></script>
     <script src="..\dash-assets\assets\js\vartical-layout.min.js"></script>
     <script src="..\dash-assets\assets\js\jquery.mCustomScrollbar.concat.min.js"></script>
     <script type="text/javascript" src="..\dash-assets\assets\pages\dashboard\crm-dashboard.min.js"></script>
     <script type="text/javascript" src="..\dash-assets\assets\js\script.js"></script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 
 
 
 
 
 
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'UA-23581568-13');
-</script>
-<!-- <script type="text/javascript">
+        gtag('config', 'UA-23581568-13');
+    </script>
+    <!-- <script type="text/javascript">
     $(window).ready(function () {
     //    alert("Window Loaded");
     });
  </script> -->
- 
 
 
-</body>
 
-</html>
+    </body>
+
+    </html>

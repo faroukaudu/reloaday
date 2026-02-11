@@ -103,14 +103,51 @@ function dataBuy (network, planID, phoneNumber){
 
 }
 
-function testme (){
-  console.log("Getting Airtime");
+function gladtidingsdata() {
+  return new Promise((resolve, reject) => {
+    const options = {
+      hostname: "www.gladtidingsdata.com",
+      port: 443,
+      path: "/api/user/",
+      method: "GET",
+      headers: {
+        Authorization: `Token ${process.env.GLADTIDE_AUTH}`,
+        Accept: "application/json",
+      },
+    };
+
+    const req = https.request(options, (res) => {
+      let output = "";
+
+      res.on("data", (chunk) => (output += chunk));
+      res.on("end", () => {
+//         console.log("STATUS:", resPost.statusCode);
+// console.log("BODY:", output);
+        if (!output) return reject("No Data to Return");
+
+        // handle non-2xx cleanly
+        if (res.statusCode < 200 || res.statusCode >= 300) {
+          return reject(`HTTP ${res.statusCode}: ${output}`);
+        }
+
+        try {
+          resolve(JSON.parse(output));
+        } catch (e) {
+          reject(`Response not JSON: ${output}`);
+        }
+      });
+    });
+
+    req.on("error", (e) => reject(`Problem with request: ${e.message}`));
+    req.end();
+  });
 }
 
 module.exports = {
   airtime:airtimeRefill,
   mobileData:dataBuy,
-  test:testme,
+  gladUser:gladtidingsdata
+  // test:testme,
 
 }
 

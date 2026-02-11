@@ -1,0 +1,261 @@
+﻿<%- include("../../includes/dash/head", {userInfo:userInfo}); -%>
+
+
+
+  <div class="pcoded-content">
+    <div class="pcoded-inner-content">
+      <!-- Main-body start -->
+      <div class="main-body">
+        <div class="page-wrapper">
+          <!-- Page-header start -->
+          <div class="page-header">
+            <div class="row align-items-end">
+              <div class="col-lg-8">
+                <div class="page-header-title">
+                  <div class="d-inline">
+                    <h4>Super Admin Dashboard</h4>
+                    <span>Admin Panel</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                  <ul class="breadcrumb-title">
+                    <li class="breadcrumb-item">
+                      <a href="index-1.htm"> <i class="feather icon-home"></i> </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Widget</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Page-header end -->
+          <!-- Page-body start -->
+          <div class="page-body">
+            <div class="row">
+              <!-- task, page, download counter  start -->
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-c-yellow update-card">
+                  <div class="card-block">
+                    <div class="row align-items-end">
+                      <div class="col-8">
+                        <h5 class="text-white">₦<%= apiBalance.toLocaleString()%>
+                        </h5>
+                        <h6 class="text-white">Api Balance</h6>
+                      </div>
+                      <div class="col-4 text-right">
+                        <canvas id="update-chart-1" height="50"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>update : 2:15
+                      am</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-c-green update-card">
+                  <div class="card-block">
+                    <div class="row align-items-end">
+                      <div class="col-8">
+                        <h4 class="text-white">
+                          <%=totalUserCount%>
+                        </h4>
+                        <h6 class="text-white m-b-0">Users</h6>
+                      </div>
+                      <div class="col-4 text-right">
+                        <canvas id="update-chart-2" height="50"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>update : 2:15
+                      am</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-c-pink update-card">
+                  <div class="card-block">
+                    <div class="row align-items-end">
+                      <div class="col-8">
+                        <h4 class="text-white">145</h4>
+                        <h6 class="text-white m-b-0">Profit / Loss</h6>
+                      </div>
+                      <div class="col-4 text-right">
+                        <canvas id="update-chart-3" height="50"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>update : 2:15
+                      am</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-c-lite-green update-card">
+                  <div class="card-block">
+                    <div class="row align-items-end">
+                      <div class="col-8">
+                        <h4 class="text-white">
+                          <%= txFeed.length %>
+                        </h4>
+                        <h6 class="text-white m-b-0">Total Transaction</h6>
+                      </div>
+                      <div class="col-4 text-right">
+                        <canvas id="update-chart-4" height="50"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+
+                    <p class="text-white m-b-0">
+                      <i class="feather icon-clock text-white f-14 m-r-10"></i>
+
+                      <%= new Date(txFeed[0].date).toLocaleString("en-NG", { timeZone: "Africa/Lagos" }) %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- task, page, download counter  end -->
+
+              <!-- Transaction Deposits -->
+              <div class="col-xl-12 col-md-12">
+                <!-- Zero config.table start -->
+                <div class="card">
+                  <div class="card-header">
+                    <h5>Activities</h5>
+                  </div>
+                  <div class="card-block">
+                    <div class="dt-responsive table-responsive">
+                      <table id="simpletable" class="table table-striped table-bordered nowrap">
+                        <thead>
+                          <tr>
+                            <th>Email</th>
+                            <th>Payment Method</th>
+                            <th>Transaction ID</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% txFeed.forEach(function(depo){ const d=new Date(depo.date); const
+                            dateStr=isNaN(d.getTime()) ? "-" : d.toISOString().replace("T"," ").replace(" Z"," UTC"); %>
+                            <tr>
+                              <td>
+                                <%= depo.email %>
+                              </td>
+                              <td>
+                                <%= depo.paymentMeth %>
+                              </td>
+                              <td>
+                                <%= depo.transactionRef %>
+                              </td>
+                              <td>
+                                <%= depo.paymentDesc %>
+                              </td>
+                              <td>₦ <%= Number(depo.amountPaid).toLocaleString('en-NG') %>
+                              </td>
+                              <td>
+                                <%= dateStr %>
+                              </td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!-- Zero config.table end -->
+              </div>
+              <!-- end -->
+              <!-- subscribe start -->
+              <div class="col-md-12 col-lg-4">
+                <div class="card">
+                  <div class="card-block text-center">
+                    <i class="feather icon-mail text-c-lite-green d-block f-40"></i>
+                    <h4 class="m-t-20"><span class="text-c-lite-green">Manage</span> </h4>
+                    <p class="m-b-20">Your Airtime & Data Plans</p>
+                    <button class="btn btn-primary btn-sm btn-round">Manage Topup plans</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="card">
+                  <div class="card-block text-center">
+                    <i class="feather icon-twitter text-c-green d-block f-40"></i>
+                    <h4 class="m-t-20"><span class="text-c-blgreenue">View</span> All</h4>
+                    <p class="m-b-20">Your Registered Users</p>
+                    <button class="btn btn-success btn-sm btn-round">Check them out</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="card">
+                  <div class="card-block text-center">
+                    <i class="feather icon-briefcase text-c-pink d-block f-40"></i>
+                    <h4 class="m-t-20">Manage your</h4>
+                    <p class="m-b-20">Transactions on both Invoice & Receipt</p>
+                    <button class="btn btn-danger btn-sm btn-round">All Transactions</button>
+                  </div>
+                </div>
+              </div>
+              <!--subscribe end -->
+
+
+            </div>
+          </div>
+          <!-- Page-body end -->
+        </div>
+        <div id="styleSelector"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Scripts -->
+  <script type="text/javascript" src="..\dash-assets\bower_components\jquery\js\jquery.min.js"></script>
+  <script type="text/javascript" src="..\dash-assets\bower_components\jquery-ui\js\jquery-ui.min.js"></script>
+  <script type="text/javascript" src="..\dash-assets\bower_components\popper.js\js\popper.min.js"></script>
+  <script type="text/javascript" src="..\dash-assets\bower_components\bootstrap\js\bootstrap.min.js"></script>
+  <script type="text/javascript"
+    src="..\dash-assets\bower_components\jquery-slimscroll\js\jquery.slimscroll.js"></script>
+  <script type="text/javascript" src="..\dash-assets\bower_components\modernizr\js\modernizr.js"></script>
+  <script type="text/javascript" src="..\dash-assets\bower_components\modernizr\js\css-scrollbars.js"></script>
+  <script type="text/javascript" src="..\dash-assets\bower_components\sweetalert\js\sweetalert.min.js"></script>
+  <script type="text/javascript" src="..\dash-assets\assets\js\modal.js"></script>
+  <script type="text/javascript" src="..\dash-assets\assets\js\modalEffects.js"></script>
+  <script type="text/javascript" src="..\dash-assets\assets\js\classie.js"></script>
+  <script type="text/javascript" src="..\dash-assets\bower_components\chart.js\js\Chart.js"></script>
+  <!-- gauge js -->
+  <script src="..\dash-assets\assets\pages\widget\amchart\amcharts.js"></script>
+  <script src="..\dash-assets\assets\pages\widget\amchart\serial.js"></script>
+  <script src="..\dash-assets\assets\pages\widget\amchart\light.js"></script>
+
+  <script type="text/javascript" src="..\dash-assets\assets\pages\widget\custom-widget1.js"></script>
+  <script type="text/javascript" src="..\dash-assets\assets\js\SmoothScroll.js"></script>
+
+  <script type="text/javascript" src="..\dash-assets\bower_components\i18next\js\i18next.min.js"></script>
+  <script type="text/javascript"
+    src="..\dash-assets\bower_components\i18next-xhr-backend\js\i18nextXHRBackend.min.js"></script>
+  <script type="text/javascript"
+    src="..\dash-assets\bower_components\i18next-browser-languagedetector\js\i18nextBrowserLanguageDetector.min.js"></script>
+  <script type="text/javascript" src="..\dash-assets\bower_components\jquery-i18next\js\jquery-i18next.min.js"></script>
+  <script src="..\dash-assets\assets\js\pcoded.min.js"></script>
+  <script src="..\dash-assets\assets\js\vartical-layout.min.js"></script>
+  <script src="..\dash-assets\assets\js\jquery.mCustomScrollbar.concat.min.js"></script>
+  <script type="text/javascript" src="..\dash-assets\assets\js\script.js"></script>
+
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-23581568-13');
+  </script>
+
+  </body>
+
+  </html>

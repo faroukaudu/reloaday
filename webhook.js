@@ -69,6 +69,8 @@ app.post("/webhook", express.raw({ type: "*/*" }), async (req, res) => {
   const webhookData = await req.body;
   console.log("✅ WEBHOOK HIT");
   console.log("headers:", req.headers);
+    // IMPORTANT: respond immediately
+  res.status(200).send("ok");
   // console.log("raw length:", req.body?.length);
   // console.log("webhooks: ", webhookData.data);
   // console.log(webhookData.order);
@@ -180,6 +182,5 @@ app.post("/webhook", express.raw({ type: "*/*" }), async (req, res) => {
 
 
 
-  // IMPORTANT: respond immediately
-  res.status(200).send("ok");
+
 });

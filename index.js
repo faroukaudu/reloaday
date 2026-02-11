@@ -21,6 +21,7 @@ const MongoStore = require("connect-mongo");
 var randomize = require('randomatic');
 const Payment = require('./middleware/payment.js');
 const nombapay = require("./middleware/nomba_pay.js");
+const { log } = require("handlebars");
 var mobileNetworkSchema = require(__dirname + "/db/dataplans.js");
 // const topUp = require("./apis/mobileRecharge.js")
 // const Payment = require('./middleware/payment.js');
@@ -206,6 +207,13 @@ const Dataplan = mongoose.model("DataPlan", mobileNetworkSchema);
 
 // Landing Page
 app.get("/", (req,res)=>{
+  console.log("GLADTIDE_AUTH:", process.env.GLADTIDE_AUTH);
+// console.log("NOMBA_SECRET:", process.env.NOMBA_SECRET);
+console.log("BASE_URL:", process.env.BASE_URL);
+console.log("LIve client ID", process.env.NOMBA_CLIENT_ID_LIVE);
+console.log("Private Key", process.env.NOMBA_PRIVATE_KEY_LIVE);
+
+
     // console.log("Hello world");
     Dataplan.find({}).then((data)=>{
       res.render("frontend/landing", {dataplans:data});

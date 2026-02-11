@@ -1,3 +1,7 @@
+
+
+// alert("I am inside Modal");
+
 //   'use strict';
 // $(document).ready(function () {
 // //Basic alert

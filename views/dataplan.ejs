@@ -12,6 +12,7 @@
         <input type="text" placeholder="btype" name="btype">
         <input type="text" placeholder="size" name="bsize">
         <input type="text" placeholder="duration" name="dur">
+        <input type="text" placeholder="API-amount" name="apiamount">
         <input type="text" placeholder="amount" name="amount">
         
         <button type="submit">Submit</button>
@@ -32,6 +33,9 @@
             <p><%= plan.bundleType %></p>
             <p><%= plan.bundleSize %></p>
             <p><%= plan.bundleDuration %></p>
+            <p style="color: rgb(22, 7, 66); font-size: larger;
+            font-weight: 900;"><%= plan.apiAmount %></p>
+            
             <p style="color: green; font-size: larger;
             font-weight: 900;"><%= plan.amount %></p>
             </div>

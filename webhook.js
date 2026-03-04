@@ -103,13 +103,15 @@ app.post("/webhook", express.raw({ type: "*/*" }), async (req, res) => {
   const anyno = web2DB.userEmail;
   if (anyno.includes("anonymous")) {
     console.log("This is an anynomouse user");
-    Anonymous.findOne({ email: _.capitalize(web2DB.userEmail) }).then((anyno) => {
+    Anonymous.findOne({ email: _.capitalize(web2DB.userEmail)}).then((anyno) => {
       console.log("User Found & the name is " + anyno);
       if (web2DB.paymentStatus === "payment_success") {
 
         // IF the Request is a Airtime
         if(anyno.triggerType === "airtime"){
-          topUp.airtime(network, web2DB.amountPaid, phone).then(airtime => {
+          let payCutter = ((100/99)*web2DB.amountPaid);
+
+          topUp.airtime(network, payCutter, phone).then(airtime => {
           anyno.successful = true;
           anyno.save();
           console.log("AIRTIME PAID!!!");
@@ -152,7 +154,7 @@ app.post("/webhook", express.raw({ type: "*/*" }), async (req, res) => {
 
 
 
-    // Registred User
+    // Registered User
       User.findOne({ username: _.capitalize(web2DB.userEmail) }).then((userFound) => {
     console.log("User Found & the name is " + userFound);
     if (web2DB.paymentStatus === "payment_success") {

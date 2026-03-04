@@ -17,6 +17,7 @@ const anonymousInfoSchema = new mongoose.Schema({
   successful:Boolean,
   type:String,
   plan:String,
+  profitLoss:Number,
   
 
  

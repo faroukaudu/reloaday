@@ -17,6 +17,7 @@ const activitySchema = new mongoose.Schema({
     bundleCode:String,
     status:String,
     date:String,
+    profitLoss:Number,
     
     
 

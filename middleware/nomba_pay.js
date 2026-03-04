@@ -51,6 +51,7 @@ async function accessToken (){
 // https://api.nomba.com/v1/auth/token/issue
 
 const apiFecther = await fetch('https://api.nomba.com/v1/auth/token/issue', options)
+// const apiFecther = await fetch('https://sandbox.nomba.com/v1/auth/token/issue', options)
   .then(res => res.json())
   .then(res => {
     // accessNewToken = res.data.access_token;
@@ -84,6 +85,7 @@ async function paymentCheckOut (fullname, email, amount, id, desc){
                 body: JSON.stringify({
                     order: {
                     callbackUrl: 'https://reloaday-4ruq.onrender.com/dashboard',
+                    // callbackUrl: 'http://localhost:3000/dashboard',
                     customerEmail: email,
                     amount: amount,
                     currency: 'NGN',
@@ -100,6 +102,7 @@ async function paymentCheckOut (fullname, email, amount, id, desc){
                 };
 
         const checkOut = await fetch('https://api.nomba.com/v1/checkout/order', options)
+        // const checkOut = await fetch('https://sandbox.nomba.com/v1/checkout/order', options)
         .then(res => res.json())
         .then(res =>{
             return res;

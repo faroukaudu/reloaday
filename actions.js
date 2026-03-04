@@ -102,6 +102,8 @@ app.post("/topit", (req, res) => {
                   bundleCode: plan.bundleCode,
                   date: result.create_date,
                   status: result.Status,
+                  profitLoss: Number((plan.amount - plan.apiAmount).toFixed(2)),
+
 
                 }).then((sent) => {
                   res.redirect(`/invoice?planInfo=${encodeURIComponent(results)}`);
@@ -232,11 +234,13 @@ app.get("/dbpush", (req, res) => {
 app.post("/dataplan", async (req, res) => {
 
   var amt = Number(req.body.amount);
+
   const dPlans = {
     networkName: _.upperCase(req.body.nname),
     bundleType: req.body.btype,
     bundleSize: _.upperCase(req.body.bsize),
     bundleDuration: _.capitalize(req.body.dur),
+    apiAmount : req.body.apiamount,
     amount: amt,
     bundleCode: req.body.bcode,
   }
@@ -303,6 +307,27 @@ app.get("/airtime", (req, res) => {
   }
 })
 
+
+    function calcuatePL(networkID, amount){
+      var profitLoss;
+      if(networkID === "MTN" || networkID === "1" || networkID === 1){
+        profitLoss = ((amount/100)*2)
+        console.log("profit loss is "+profitLoss);
+        
+      }else if(networkID === "GLO" || networkID === "2" || networkID === 2){
+        profitLoss = ((amount/100)*4.5)
+      }else if(networkID === "AIRTEL" || networkID === "3" || networkID === 3){
+        profitLoss = ((amount/100)*1)
+      }else if (networkID === "9MOBILE" || networkID === "6" || networkID === 6){
+        profitLoss = ((amount/100)*2.5)
+      }else {
+        console.log("Not a network");
+        
+      }
+      return profitLoss;
+    
+    }
+
 app.post("/airtime", (req, res) => {
 
   if (!req.isAuthenticated()) {
@@ -342,7 +367,7 @@ app.post("/airtime", (req, res) => {
         // if (result.Status === "successful") {
           
            console.log("aitime");
-            userFound.wallet_balace = userFound.wallet_balace - amount;
+            userFound.wallet_balace = userFound.wallet_balace - (amount/100)*99;
             userFound.save();
 
           Activity.create({
@@ -359,6 +384,8 @@ app.post("/airtime", (req, res) => {
             // bundleCode:plan.bundleCode,
             date: result.create_date,
             status: result.Status,
+            profitLoss: Number(calcuatePL(network,amount)),
+
 
           }).then((send => {
            

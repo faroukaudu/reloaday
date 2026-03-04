@@ -8,6 +8,7 @@ const mobileNetworkSchema = new mongoose.Schema({
     bundleType:String,
     bundleSize:String,
     bundleDuration:String,
+    apiAmount:Number,
     amount:Number,
     bundleCode:String,
 

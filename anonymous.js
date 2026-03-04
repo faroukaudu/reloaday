@@ -45,6 +45,26 @@ function findDataAmount(myBundleCode){
     }
     return networkID;
     }
+// CALCULATING PROFIT OR LOSS
+    function calcuatePL(networkID, amount){
+      var profitLoss;
+      if(networkID === "MTN"){
+        profitLoss = ((amount/100)*2)
+        console.log("profit loss is "+profitLoss);
+        
+      }else if(networkID === "GLO"){
+        profitLoss = ((amount/100)*4.5)
+      }else if(networkID === "AIRTEL"){
+        profitLoss = ((amount/100)*1)
+      }else if (networkID === "9MOBILE"){
+        profitLoss = ((amount/100)*2.5)
+      }else {
+        console.log("Not a network");
+        
+      }
+      return profitLoss;
+    
+    }
 
 app.post("/quickairtime", async (req,res)=>{
     
@@ -55,6 +75,7 @@ app.post("/quickairtime", async (req,res)=>{
       var tAmount = Number(req.body.amount);
       // Round to 2 decimal point
       let roundedAmt = parseFloat(tAmount).toFixed(2);
+      let payCut = ((roundedAmt/100)*99);
       console.log("Amount to Pay "+roundedAmt );
       var fullname = "Anonymous"; 
       // var email = "anonymous@reloaday.com"+phoneNum+"."+networkID(req.body.airtime_network)+"."+randomize('aA0', 6);
@@ -62,6 +83,7 @@ app.post("/quickairtime", async (req,res)=>{
       var paymentInfo = "Anonymous Airtime Topup";
       var newtriggerRef = randomize('aA0', 19);
       var cutId = "Anynomous"
+      
     
    
     //  Payment.monnify(fullname,
@@ -86,8 +108,10 @@ app.post("/quickairtime", async (req,res)=>{
     //         console.log(err);
             
     //        })
+    console.log("this is my profit>>>>>", calcuatePL(req.body.airtime_network,tAmount));
+    
 
-           const data =await nombapay(fullname,email,roundedAmt,cutId).then(data =>{
+           const data =await nombapay(fullname,email,payCut,cutId).then(data =>{
             Anonymous.create({
               triggerRef:newtriggerRef,
               triggerType:req.body.type,
@@ -99,6 +123,7 @@ app.post("/quickairtime", async (req,res)=>{
               type:"Airtime",
               successful:false,
               plan:null,
+              profitLoss:Number(calcuatePL(req.body.airtime_network,tAmount)),
               // email:req.body.email
     
             });

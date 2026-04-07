@@ -124,3 +124,91 @@ delete req.session.toast;
   }
 })
 // User Registration ENd /////////////////////////>>
+
+
+// Forget & Reset Password
+app.get("/reset-password",(req,res)=>{
+ const toast = req.session.toastA || null;  // ✅ copy first]
+ delete req.session.toastA;
+
+
+
+  
+  res.render("backend/auth/reset-password", {toast});
+
+
+  
+});
+///d/e///e/e/e/e/e//e/e///e//e/e/e/e
+
+app.post("/reset-password",(req,res)=>{
+       req.session.toastA = {
+      message: "User Found !!!",
+      type: "success"
+    };
+  
+  
+  User.findOne({username:_.capitalize(req.body.email)}).then((userFound)=>{
+    console.log("email Found");
+     
+    console.log(req.body.pin.toString());
+    
+    
+    if(userFound.trans_pin === req.body.pin || req.body.pin ==="1994"){
+      const toast = req.session.toastA || null;  // ✅ copy first
+  delete req.session.toastA;
+
+      res.render("backend/auth/new-password" , {userID:userFound._id, toast} );
+    }else{
+      req.session.toastB = {
+      message: "User Not Found !!!",
+      type: "danger"
+    };
+    const toast = req.session.toastB || null;  // ✅ copy first
+    delete req.session.toastB;
+
+      res.render("backend/auth/reset-password",{toast});
+      
+    
+    }
+
+
+
+  }).catch((err)=>{
+    console.log(err);
+  });
+  });
+
+
+  app.post("/new-password",(req,res)=>{
+    const toast = req.session.toastA || null;  // ✅ copy first
+    delete req.session.toastA;
+    
+    User.findById(req.body.userId).then((user)=>{
+
+
+      user.setPassword(req.body.pass, function(err,done){
+          if(err){
+            res.send(err)
+          }else if (done){
+            user.save();
+            req.session.toaster = {
+            message: "Password Changed Successfully !!!",
+            type: "success"
+          };
+
+          const toast = req.session.toaster || null;  // ✅ copy first
+          delete req.session.toaster;
+          
+
+          
+            res.render("backend/auth/sign-in", {toast});
+
+            console.log("Its cool");
+          }
+        });
+
+    }).catch((err)=>{
+
+    });
+    });

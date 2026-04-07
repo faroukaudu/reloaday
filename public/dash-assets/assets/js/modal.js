@@ -111,7 +111,7 @@ function mypull (mypin) {
 	
 	swal({
 		title: "Enter Pin!",
-		text: "Kindly provide your transaction pin:"+mypin,
+		text: "Kindly provide your transaction pin:",
 		type: "input",
 		showCancelButton: true,
 		closeOnConfirm: false,

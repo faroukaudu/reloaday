@@ -84,7 +84,7 @@ async function paymentCheckOut (fullname, email, amount, id, desc){
                 },
                 body: JSON.stringify({
                     order: {
-                    callbackUrl: 'https://reloaday-4ruq.onrender.com/dashboard',
+                    callbackUrl: 'https://www.reloaday.com/dashboard',
                     // callbackUrl: 'http://localhost:3000/dashboard',
                     customerEmail: email,
                     amount: amount,

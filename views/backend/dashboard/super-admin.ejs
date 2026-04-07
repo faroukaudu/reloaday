@@ -81,7 +81,9 @@
                   <div class="card-block">
                     <div class="row align-items-end">
                       <div class="col-8">
-                        <h4 class="text-white"><%= profitLoss %></h4>
+                        <h4 class="text-white">
+                          <%= profitLoss %>
+                        </h4>
                         <h6 class="text-white m-b-0">Profit / Loss</h6>
                       </div>
                       <div class="col-4 text-right">
@@ -180,7 +182,20 @@
                     <i class="feather icon-mail text-c-lite-green d-block f-40"></i>
                     <h4 class="m-t-20"><span class="text-c-lite-green">Manage</span> </h4>
                     <p class="m-b-20">Your Airtime & Data Plans</p>
-                    <button class="btn btn-primary btn-sm btn-round">Manage Topup plans</button>
+                    
+                    <div class="btn-group dropdown-split-primary btn-sm btn-round">
+                      <button type="button" class="btn btn-primary btn-sm btn-round dropdown-toggle dropdown-toggle-split waves-effect waves-light"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                          class="icofont icofont-check-circled"></i>Manage Topup plans</button>
+                      
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item waves-effect waves-light" href="/edit-plan/mtn">MTN</a>
+                        <a class="dropdown-item waves-effect waves-light" href="/edit-plan/airtel">AIRTEL</a>
+                        <a class="dropdown-item waves-effect waves-light" href="/edit-plan/9mobile">9 MOBILE</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item waves-effect waves-light" href="/edit-plan/glo">GLO</a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -190,7 +205,7 @@
                     <i class="feather icon-twitter text-c-green d-block f-40"></i>
                     <h4 class="m-t-20"><span class="text-c-blgreenue">View</span> All</h4>
                     <p class="m-b-20">Your Registered Users</p>
-                    <button class="btn btn-success btn-sm btn-round">Check them out</button>
+                    <a href="/all-users" class="btn btn-success btn-sm btn-round">Check them out</a>
                   </div>
                 </div>
               </div>
@@ -200,7 +215,17 @@
                     <i class="feather icon-briefcase text-c-pink d-block f-40"></i>
                     <h4 class="m-t-20">Manage your</h4>
                     <p class="m-b-20">Transactions on both Invoice & Receipt</p>
-                    <button class="btn btn-danger btn-sm btn-round">All Transactions</button>
+                    <div class="btn-group dropdown-split-primary btn-sm btn-round">
+                      <button type="button" class="btn btn-danger btn-sm btn-round dropdown-toggle dropdown-toggle-split waves-effect waves-light"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                          class="icofont icofont-check-circled"></i>All Transactions</button>
+                      
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item waves-effect waves-light" href="/transact/registered-user">Registered Users</a>
+                        <a class="dropdown-item waves-effect waves-light" href="/transact/anynomous-user">Anynomous Users</a>
+                       
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

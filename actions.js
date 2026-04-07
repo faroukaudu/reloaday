@@ -11,6 +11,7 @@ const { stringify } = require('querystring');
 const { userInfo } = require('os');
 var mobileNetworkSchema = require(__dirname + "/db/dataplans.js");
 var activitySchema = require(__dirname + "/db/activities.js");
+const anonymousInfoSchema = require(__dirname + "/db/anony.js");
 // const nombaPay = require("./middleware/nomba_pay.js");
 
 
@@ -21,6 +22,7 @@ var activitySchema = require(__dirname + "/db/activities.js");
 
 const Dataplan = mongoose.model("DataPlan", mobileNetworkSchema);
 const Activity = mongoose.model("Activity", activitySchema);
+const Anonymous = mongoose.model("Anony", anonymousInfoSchema);
 
 
 
@@ -81,48 +83,48 @@ app.post("/topit", (req, res) => {
               console.log(result.mobile_number);
 
 
-              
-                userFound.wallet_balace = userFound.wallet_balace - plan.amount;
-                userFound.save();
-                // res.send(result);
 
-                console.log("MY RESULT FOR DATA IS" + result);
-                // const Activity = mongoose.model("Activity",activitySchema);
-                Activity.create({
-                  userId: req.user.id,
-                  fullname: _.capitalize(req.user.firstname + " " + req.user.lastname),
-                  email: _.capitalize(req.user.username),
-                  orderId: result.ident,
-                  networkName: result.plan_network,
-                  phone: result.mobile_number,
-                  bundleType: "Data",
-                  bundleSize: result.plan_name,
-                  bundleDuration: result.duration,
-                  amount: plan.amount,
-                  bundleCode: plan.bundleCode,
-                  date: result.create_date,
-                  status: result.Status,
-                  profitLoss: Number((plan.amount - plan.apiAmount).toFixed(2)),
+              userFound.wallet_balace = userFound.wallet_balace - plan.amount;
+              userFound.save();
+              // res.send(result);
 
-
-                }).then((sent) => {
-                  res.redirect(`/invoice?planInfo=${encodeURIComponent(results)}`);
-                }).catch((e) => {
-                  console.log(e);
-
-                })
+              console.log("MY RESULT FOR DATA IS" + result);
+              // const Activity = mongoose.model("Activity",activitySchema);
+              Activity.create({
+                userId: req.user.id,
+                fullname: _.capitalize(req.user.firstname + " " + req.user.lastname),
+                email: _.capitalize(req.user.username),
+                orderId: result.ident,
+                networkName: result.plan_network,
+                phone: result.mobile_number,
+                bundleType: "Data",
+                bundleSize: result.plan_name,
+                bundleDuration: result.duration,
+                amount: plan.amount,
+                bundleCode: plan.bundleCode,
+                date: result.create_date,
+                status: result.Status,
+                profitLoss: Number((plan.amount - plan.apiAmount).toFixed(2)),
 
 
+              }).then((sent) => {
+                res.redirect(`/invoice?planInfo=${encodeURIComponent(results)}`);
+              }).catch((e) => {
+                console.log(e);
+
+              })
 
 
-                //  res.send(JSON.parse(result));
-                //  const jResult = JSON.parse(result);
-                //  res.send(jResult);
-                //  console.log("results are "+ jResult);
 
-                // res.render("backend/dashboard/payment-invoice",{userInfo:req.user, planInfo:jResult});
-                // res.redirect(`/`)
-              
+
+              //  res.send(JSON.parse(result));
+              //  const jResult = JSON.parse(result);
+              //  res.send(jResult);
+              //  console.log("results are "+ jResult);
+
+              // res.render("backend/dashboard/payment-invoice",{userInfo:req.user, planInfo:jResult});
+              // res.redirect(`/`)
+
 
 
             }).catch((e) => {
@@ -213,9 +215,9 @@ app.get("/invoice-airtime", (req, res) => {
     console.log(paymentInfo.plan_network);
 
     // Dataplan.findOne({ bundleCode: paymentInfo.plan }).then((planFound) => {
-      // console.log(planFound);
+    // console.log(planFound);
 
-      res.render("backend/dashboard/payment-in-airtime", { userInfo: req.user, planInfo: paymentInfo, amount: paymentInfo.plan_amount });
+    res.render("backend/dashboard/payment-in-airtime", { userInfo: req.user, planInfo: paymentInfo, amount: paymentInfo.plan_amount });
     // })
   } else {
     res.redirect("/sign-in");
@@ -240,7 +242,7 @@ app.post("/dataplan", async (req, res) => {
     bundleType: req.body.btype,
     bundleSize: _.upperCase(req.body.bsize),
     bundleDuration: _.capitalize(req.body.dur),
-    apiAmount : req.body.apiamount,
+    apiAmount: req.body.apiamount,
     amount: amt,
     bundleCode: req.body.bcode,
   }
@@ -308,25 +310,25 @@ app.get("/airtime", (req, res) => {
 })
 
 
-    function calcuatePL(networkID, amount){
-      var profitLoss;
-      if(networkID === "MTN" || networkID === "1" || networkID === 1){
-        profitLoss = ((amount/100)*2)
-        console.log("profit loss is "+profitLoss);
-        
-      }else if(networkID === "GLO" || networkID === "2" || networkID === 2){
-        profitLoss = ((amount/100)*4.5)
-      }else if(networkID === "AIRTEL" || networkID === "3" || networkID === 3){
-        profitLoss = ((amount/100)*1)
-      }else if (networkID === "9MOBILE" || networkID === "6" || networkID === 6){
-        profitLoss = ((amount/100)*2.5)
-      }else {
-        console.log("Not a network");
-        
-      }
-      return profitLoss;
-    
-    }
+function calcuatePL(networkID, amount) {
+  var profitLoss;
+  if (networkID === "MTN" || networkID === "1" || networkID === 1) {
+    profitLoss = ((amount / 100) * 2)
+    console.log("profit loss is " + profitLoss);
+
+  } else if (networkID === "GLO" || networkID === "2" || networkID === 2) {
+    profitLoss = ((amount / 100) * 4.5)
+  } else if (networkID === "AIRTEL" || networkID === "3" || networkID === 3) {
+    profitLoss = ((amount / 100) * 1)
+  } else if (networkID === "9MOBILE" || networkID === "6" || networkID === 6) {
+    profitLoss = ((amount / 100) * 2.5)
+  } else {
+    console.log("Not a network");
+
+  }
+  return profitLoss;
+
+}
 
 app.post("/airtime", (req, res) => {
 
@@ -363,39 +365,39 @@ app.post("/airtime", (req, res) => {
         console.log(result.Status);
         console.log(result.mobile_number);
 
-        
+
         // if (result.Status === "successful") {
-          
-           console.log("aitime");
-            userFound.wallet_balace = userFound.wallet_balace - (amount/100)*99;
-            userFound.save();
 
-          Activity.create({
-            userId: req.user.id,
-            fullname: _.capitalize(req.user.firstname + " " + req.user.lastname),
-            email: _.capitalize(req.user.username),
-            orderId: result.id,
-            networkName: result.plan_network,
-            phone: result.mobile_number,
-            bundleType: "Airtime-VTU",
-            // bundleSize:result.plan_name,
-            // bundleDuration:result.duration,
-            amount: amount,
-            // bundleCode:plan.bundleCode,
-            date: result.create_date,
-            status: result.Status,
-            profitLoss: Number(calcuatePL(network,amount)),
+        console.log("aitime");
+        userFound.wallet_balace = userFound.wallet_balace - (amount / 100) * 99;
+        userFound.save();
+
+        Activity.create({
+          userId: req.user.id,
+          fullname: _.capitalize(req.user.firstname + " " + req.user.lastname),
+          email: _.capitalize(req.user.username),
+          orderId: result.id,
+          networkName: result.plan_network,
+          phone: result.mobile_number,
+          bundleType: "Airtime-VTU",
+          // bundleSize:result.plan_name,
+          // bundleDuration:result.duration,
+          amount: amount,
+          // bundleCode:plan.bundleCode,
+          date: result.create_date,
+          status: result.Status,
+          profitLoss: Number(calcuatePL(network, amount)),
 
 
-          }).then((send => {
-           
-            res.redirect(`/invoice-airtime?airtimeInfo=${encodeURIComponent(results)}`);
-            // res.send("Airtime Paid");
+        }).then((send => {
 
-          })).catch((e => {
-            res.send(e);
+          res.redirect(`/invoice-airtime?airtimeInfo=${encodeURIComponent(results)}`);
+          // res.send("Airtime Paid");
 
-          }));
+        })).catch((e => {
+          res.send(e);
+
+        }));
         // }
 
 
@@ -429,6 +431,7 @@ app.post("/airtime", (req, res) => {
 
 // //////////////////////////////////////////////////////
 const nombapay = require("./middleware/nomba_pay.js");
+const { send } = require('process');
 app.get("/testing-me", async (req, res) => {
   const data = await nombapay();
   // console.log();
@@ -440,3 +443,243 @@ app.get("/testing-me", async (req, res) => {
 
   // res.send("I am here");
 })
+
+
+// Admin Wallet Toping
+app.post("/walletAdminTopup", (req, res) => {
+  // {userid, amount} req.body;
+
+  console.log(req.body.userid);
+
+  User.findById(req.body.userid).then((userFound) => {
+    userFound.wallet_balace = userFound.wallet_balace + Number(req.body.amount);
+    userFound.save();
+    setTimeout(function () {
+
+      res.json({
+        status: "success",
+        message: "Wallet topped"
+      });
+      // location.reload();
+    }, 1500); // 3000ms = 2 seconds
+
+
+
+
+  }).catch((e) => {
+    console.log(e);
+
+  })
+
+
+  console.log(req.body.amount);
+
+
+
+
+})
+
+// Making User Admin
+app.post("/make-admin", (req, res) => {
+  if (req.isAuthenticated()) {
+    if (req.user.isAdmin) {
+      User.findById(req.body.userid).then((userFound) => {
+        userFound.isAdmin = true;
+        userFound.save();
+
+        setTimeout(function () {
+
+          res.json({
+            status: "success",
+            message: "Wallet topped"
+          });
+          // location.reload();
+        }, 1500); // 3000ms = 2 seconds
+      }).catch((e) => {
+        console.log(e);
+
+      });
+    }
+  }
+});
+
+
+// Deleting User ADMIN
+app.post("/delete-user", (req, res) => {
+  if (req.isAuthenticated()) {
+    if (req.user.isAdmin) {
+      User.deleteOne({ _id: req.body.userid }).then((userFound) => {
+setTimeout(function () {
+
+          res.json({
+            status: "success",
+            message: "Wallet topped"
+          });
+          // location.reload();
+        }, 1500); // 3000ms = 2 seconds
+        
+
+        }).catch((e) => {
+          console.l
+        });
+
+}}
+  });
+
+app.get("/edit-plan/:network", (req, res) => {
+  console.log("We are here");
+  
+  const network = _.upperCase(req.params.network);
+  console.log(network);
+  
+
+  if(!req.isAuthenticated()){
+    res.redirect("/sign-in");
+
+  }
+
+  Dataplan.find({ networkName: network }).then((result) => {
+    res.render("backend/dashboard/edit-data",{userInfo:req.user,plans:result});
+  }
+
+
+).catch((e)=>{
+  res.send(e)
+});
+    
+
+})
+
+
+app.post("/save-new-dataplan", (req, res) => {
+  //  const {
+  //       bundlecode,
+  //       nname,
+  //       bun_type,
+  //       size,
+  //       dura,
+  //       api_cost,
+  //       cost
+  //   } = req.body;
+  // console.log(req.body);
+  console.log("here here");
+  const {bundlecode,nname,buntype,size,dura,apicost,cost} = req.body
+  
+   var dataPlans = {
+        bundleCode:bundlecode,
+        networkName:nname,
+        bundleType:buntype,
+        bundleSize:size,
+        bundleDuration:dura,
+        apiAmount:apicost,
+        amount:cost,
+    };
+    Dataplan.create(dataPlans).then((succ)=>{
+        res.json({
+            status: "success",
+            message: "Dataplan Added Successfully!"
+          });
+
+
+    }).catch((e)=>{
+      res.send(e)
+    });
+
+  
+  
+  // console.log(req.body.bundle_code, req.body.nname, req.body.bun_type, req.body.size, req.body.dura, req.body.api_cost);
+ 
+  
+});
+
+// edit plan
+app.post("/edit-dataplan",(req,res)=>{
+  const {bundlecode,nname,buntype,size,dura,apicost,cost} = req.body
+  console.log(req.body);
+  console.log("I am here");
+  
+  
+  
+  //  var dataPlans = {
+  //       networkName:nname,
+  //       bundleType:buntype,
+  //       bundleSize:size,
+  //       bundleDuration:dura,
+  //       apiAmount:apicost,
+  //       amount:cost,
+  //   };
+Dataplan.findOne({bundleCode:bundlecode}).then((resultPlan)=>{
+        resultPlan.networkName=nname;
+        resultPlan.bundleType=buntype;
+        resultPlan.bundleSize=size;
+        resultPlan.bundleDuration=dura;
+        resultPlan.apiAmount=apicost;
+        resultPlan.amount=cost;
+        resultPlan.save();
+        res.json({
+            status: "success",
+            message: "Dataplan Added Successfully!"
+          });
+
+
+
+}).catch((err)=>{
+  send(err)
+})
+});
+
+app.post("/delete-data-plan",(req,res)=>{
+  bundlecodeid = req.body.bundlecodeid;
+  console.log(bundlecodeid);
+  Dataplan.deleteOne({bundleCode:bundlecodeid}).then((result)=>{
+    res.json({
+      status: "success",
+      message: "Dataplan Deleted Successfully!"
+    });
+  }).catch((err)=>{
+    res.send(err)
+  })
+});
+
+// view all users Transactions Via Admin...
+app.get("/transact/:status",(req,res)=>{
+  if(req.isAuthenticated() && req.user.isAdmin){
+    
+  const userStats = req.params.status;
+  console.log(userStats);
+
+  if(userStats==="registered-user"){
+    Activity.find({}).then((result)=>{
+      res.render("backend/dashboard/transact-admin", {userInfo:req.user, transactions:result});
+    }).catch((e)=>{
+      res.send(e);
+
+    });
+  }else{
+    Anonymous.find().then((results)=>{
+      console.log("finding here");
+      // console.log("results are", results);
+      
+      
+      res.render("backend/dashboard/transact-any", {userInfo:req.user, transactions:results});
+    }).catch((e)=>{
+
+    });
+
+  }
+
+}else{
+  res.redirect("/sign-in");
+
+}
+
+  
+
+});
+
+
+
+
+
+
+

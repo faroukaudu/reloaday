@@ -1,0 +1,377 @@
+﻿<%- include("../../includes/dash/head", {userInfo:userInfo}); -%>
+    <link rel="stylesheet" type="text/css" href="..\dash-assets\bower_components\datatables.net-bs4\css\dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="..\dash-assets\assets\pages\data-table\css\buttons.dataTables.min.css">
+
+
+
+  <div class="pcoded-content">
+    <div class="pcoded-inner-content">
+      <!-- Main-body start -->
+      <div class="main-body">
+                            <div class="page-wrapper">
+                                <!-- Page-header start -->
+                                <div class="page-header">
+                                    <div class="row align-items-end">
+                                        <div class="col-lg-8">
+                                            <div class="page-header-title">
+                                                <div class="d-inline">
+                                                    <h4>Active Customers</h4>
+                                                    <span>View All Users</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="page-header-breadcrumb">
+                                                <ul class="breadcrumb-title">
+                                                    <li class="breadcrumb-item">
+                                                        <a href="index-1.htm"> <i class="feather icon-home"></i> </a>
+                                                    </li>
+                                                    <li class="breadcrumb-item"><a href="#!">Bootstrap Table</a>
+                                                    </li>
+                                                    <li class="breadcrumb-item"><a href="#!">Basic Initialization</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Page-header end -->
+
+                                <!-- Page-body start -->
+                                <div class="page-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <!-- Zero config.table start -->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>Users</h5>
+                                                    <span>Perform Actions of Topping Wallet and Deleting users.</span>
+
+                                                </div>
+                                                <div class="card-block">
+                                                    <div class="dt-responsive table-responsive">
+                                                        <table id="simpletable" class="table table-striped table-bordered nowrap">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>Email</th>
+                                                                <th>Rank</th>
+                                                                <th>phone</th>
+                                                                <th>Wallet</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                    <% users.forEach(function(user){ %>
+                                                                <tr>
+                                                                    <td><%= user.firstname+' '+user.lastname%></td>
+                                                                    <td><%= user.email %></td>
+                                                                    <% if(user.isAdmin){%>
+                                                                        <td style="font-weight: 700; color: green;">Admin</td>
+                                                                    <% }else{%>
+                                                                        <td>User</td>
+
+                                                                    <% }%>
+                                                                    <td><%= user.phone%></td>
+                                                                    <td><%= user.wallet_balace%></td>
+                                                                    <td><li class="" >
+                                <div class=" dropdown" >
+                                    <div class="dropdown-toggle" data-toggle="dropdown" >
+                                        
+                                        
+                                        
+                                    </div>
+                                    <ul class=" dropdown-menu" 
+                                        data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" >
+                                        
+                                        <li>
+                                            <button
+                                                type=""
+                                                id="walletBtn"
+                                                class="btn btn-primary btn-outline-primary  alert-prompt m-b-10 paymentbtn"
+                                                onclick="topWallet('<%= user.wallet_balace%>','<%= user._id %>');"
+                                            >
+                                            <i class="feather icon-settings"></i> Topup Wallet
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button
+                                                type="button"
+                                                id="walletBtn"
+                                                class="btn btn-primary btn-outline-primary  alert-prompt m-b-10 paymentbtn"
+                                                onclick="makeAdmin('<%= user._id %>');"
+                                            >
+                                            <i class="feather icon-user"></i> Make Admin
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button
+                                                type="button"
+                                                id="walletBtn"
+                                                class="btn btn-primary btn-outline-primary  alert-prompt m-b-10 paymentbtn"
+                                                onclick="deleteUser('<%= user._id %>');"
+                                            >
+                                            <i class="feather icon-user"></i> Delete User
+                                            </button>
+                                        </li>
+                                        <!-- <li>
+                                            <a href="email-inbox.htm">
+                                                <i class="feather icon-mail"></i> My Messages
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="auth-lock-screen.htm">
+                                                <i class="feather icon-lock"></i> Lock Screen
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/logout">
+                                                <i class="feather icon-log-out"></i> Logout
+                                            </a>
+                                        </li> -->
+                                    </ul>
+
+                                </div>
+                            </li></td>
+                                                                    
+                                                                    
+                                                                </tr>
+
+                                                               <% }) %>
+                                                                
+                                                           
+                                                                
+                                                               
+                                                            </tbody>
+                                                            <tfoot>
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>Email</th>
+                                                                <th>Rank</th>
+                                                                <th>Status</th>
+                                                                <th>Wallet</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Zero config.table end -->
+                                            <!-- Default ordering table start -->
+                                            
+                                            <!-- Language - Comma Decimal Place table end -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Page-body end -->
+                            </div>
+                        </div>
+    </div>
+  </div>
+<script>
+    // top wallet balance
+  function topWallet (bal, userid) {
+	// var param1 = $(element).data('param1');
+// document.querySelector('.alert-prompt').onclick = function(){
+	
+	
+		
+swal({
+    title: "Wallet Balance ₦ " + bal,
+    text: "Enter Amount you want to add to wallet: ",
+    type: "input",
+    showCancelButton: true,
+    closeOnConfirm: false,
+    showLoaderOnConfirm: true,
+    inputPlaceholder: "0000"
+}, function (inputValue) {
+
+    if (inputValue === false) return false;
+
+    if (inputValue === "" || inputValue === null) {
+        swal.showInputError("Please enter an amount!");
+        return false;
+    }
+
+    $.ajax({
+        url: '/walletAdminTopup',
+        type: 'POST',
+        data: {
+            userid: userid,
+            amount: inputValue
+        },
+        success: function (response) {
+            swal.close(); // close the input box first
+
+            setTimeout(function () {
+                swal("Success!", "Wallet topped successfully.", "success");
+
+                setTimeout(function () {
+                    location.reload();
+                }, 1000)
+              
+            }, 200);
+              
+        },
+        error: function (xhr, status, error) {
+            swal("Error!", "There was an error processing your request.", "error");
+        }
+    });
+
+    return false; // prevent SweetAlert from auto-closing weirdly
+});
+}
+    
+// make a user admin
+function makeAdmin(userid) {
+    swal({
+        title: "Are you sure?",
+        text: "You want to make this user an admin?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, proceed",
+        cancelButtonText: "No, cancel",
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true
+    }, function (isConfirm) {
+
+        if (!isConfirm) {
+            swal("Cancelled", "Transaction was cancelled", "error");
+            return;
+        }
+
+        $.ajax({
+            url: '/make-admin',
+            type: 'POST',
+            data: {
+                userid: userid
+            },
+            success: function (response) {
+                swal.close();
+
+                setTimeout(function () {
+                    swal({
+                        title: "Success!",
+                        text: "User has been made an admin.",
+                        type: "success"
+                    }, function () {
+                        location.reload();
+                    });
+                }, 200);
+            },
+            error: function () {
+                swal("Error!", "There was an error processing your request.", "error");
+            }
+        });
+
+    });
+}
+
+function deleteUser(userid) {
+    swal({
+        title: "Are you sure?",
+        text: "This user will be deleted permanently!",
+        type: "warning", // ⚠️ shows warning icon
+        showCancelButton: true,
+        confirmButtonColor: "#d9534f", // 🔴 danger red
+        confirmButtonText: "Yes, delete",
+        cancelButtonText: "No, cancel",
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true
+    }, function (isConfirm) {
+
+        if (!isConfirm) {
+            swal("Cancelled", "User was not deleted.", "error");
+            return;
+        }
+
+        $.ajax({
+            url: '/delete-user',
+            type: 'POST',
+            data: {
+                userid: userid
+            },
+            success: function () {
+                swal.close();
+
+                setTimeout(function () {
+                    swal({
+                        title: "Deleted!",
+                        text: "User has been deleted successfully.",
+                        type: "success"
+                    }, function () {
+                        location.reload();
+                    });
+                }, 200);
+            },
+            error: function () {
+                swal("Error!", "There was an error deleting the user.", "error");
+            }
+        });
+
+    });
+}
+</script>
+  <!-- Scripts -->
+  <script type="text/javascript" src="..\dash-assets\bower_components\jquery\js\jquery.min.js"></script>
+  <script type="text/javascript" src="..\dash-assets\bower_components\jquery-ui\js\jquery-ui.min.js"></script>
+  <script type="text/javascript" src="..\dash-assets\bower_components\popper.js\js\popper.min.js"></script>
+  <script type="text/javascript" src="..\dash-assets\bower_components\bootstrap\js\bootstrap.min.js"></script>
+  <script type="text/javascript"
+    src="..\dash-assets\bower_components\jquery-slimscroll\js\jquery.slimscroll.js"></script>
+  <script type="text/javascript" src="..\dash-assets\bower_components\modernizr\js\modernizr.js"></script>
+  <script type="text/javascript" src="..\dash-assets\bower_components\modernizr\js\css-scrollbars.js"></script>
+  <script type="text/javascript" src="..\dash-assets\bower_components\sweetalert\js\sweetalert.min.js"></script>
+  <script type="text/javascript" src="..\dash-assets\assets\js\modal.js"></script>
+  <script type="text/javascript" src="..\dash-assets\assets\js\modalEffects.js"></script>
+  <script type="text/javascript" src="..\dash-assets\assets\js\classie.js"></script>
+  <script type="text/javascript" src="..\dash-assets\bower_components\chart.js\js\Chart.js"></script>
+  <!-- gauge js -->
+   <!-- data-table js -->
+<script src="..\dash-assets\bower_components\datatables.net\js\jquery.dataTables.min.js"></script>
+<script src="..\dash-assets\bower_components\datatables.net-buttons\js\dataTables.buttons.min.js"></script>
+<script src="..\dash-assets\assets\pages\data-table\js\jszip.min.js"></script>
+<script src="..\dash-assets\assets\pages\data-table\js\pdfmake.min.js"></script>
+<script src="..\dash-assets\assets\pages\data-table\js\vfs_fonts.js"></script>
+<script src="..\dash-assets\bower_components\datatables.net-buttons\js\buttons.print.min.js"></script>
+<script src="..\dash-assets\bower_components\datatables.net-buttons\js\buttons.html5.min.js"></script>
+<script src="..\dash-assets\bower_components\datatables.net-bs4\js\dataTables.bootstrap4.min.js"></script>
+<script src="..\dash-assets\bower_components\datatables.net-responsive\js\dataTables.responsive.min.js"></script>
+<script src="..\dash-assets\bower_components\datatables.net-responsive-bs4\js\responsive.bootstrap4.min.js"></script>
+<script src="..\dash-assets\assets\pages\data-table\js\data-table-custom.js"></script>
+<!-- i18next.min.js -->
+<script type="text/javascript" src="..\dash-assets\bower_components\i18next\js\i18next.min.js"></script>
+<script type="text/javascript" src="..\dash-assets\bower_components\i18next-xhr-backend\js\i18nextXHRBackend.min.js"></script>
+<script type="text/javascript" src="..\dash-assets\bower_components\i18next-browser-languagedetector\js\i18nextBrowserLanguageDetector.min.js"></script>
+<script type="text/javascript" src="..\dash-assets\bower_components\jquery-i18next\js\jquery-i18next.min.js"></script>
+<!-- Custom js -->
+  <script src="..\dash-assets\assets\pages\widget\amchart\amcharts.js"></script>
+  <script src="..\dash-assets\assets\pages\widget\amchart\serial.js"></script>
+  <script src="..\dash-assets\assets\pages\widget\amchart\light.js"></script>
+
+  <script type="text/javascript" src="..\dash-assets\assets\pages\widget\custom-widget1.js"></script>
+  <script type="text/javascript" src="..\dash-assets\assets\js\SmoothScroll.js"></script>
+
+  <script type="text/javascript" src="..\dash-assets\bower_components\i18next\js\i18next.min.js"></script>
+  <script type="text/javascript"
+    src="..\dash-assets\bower_components\i18next-xhr-backend\js\i18nextXHRBackend.min.js"></script>
+  <script type="text/javascript"
+    src="..\dash-assets\bower_components\i18next-browser-languagedetector\js\i18nextBrowserLanguageDetector.min.js"></script>
+  <script type="text/javascript" src="..\dash-assets\bower_components\jquery-i18next\js\jquery-i18next.min.js"></script>
+  <script src="..\dash-assets\assets\js\pcoded.min.js"></script>
+  <script src="..\dash-assets\assets\js\vartical-layout.min.js"></script>
+  <script src="..\dash-assets\assets\js\jquery.mCustomScrollbar.concat.min.js"></script>
+  <script type="text/javascript" src="..\dash-assets\assets\js\script.js"></script>
+
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-23581568-13');
+  </script>
+
+  </body>
+
+  </html>

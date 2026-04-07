@@ -49,19 +49,39 @@ app.set('view engine', 'ejs');
 app.use(express.static("public"));
 //setting Plugins for app
 
+
+//   DB connection link
+// const uri = "mongodb://127.0.0.1:27017/topit";
+const uri = "mongodb+srv://Topit:"+process.env.MYMAINDBPASS+"@topit.qa7wgxv.mongodb.net/?retryWrites=true&w=majority&appName=topit";
+database().catch(err => console.log(err));
+
+
 // Cookies Management
 app.use(session({
   secret: process.env.SESSIONSECRET,
   resave: false,
   saveUninitialized: false,
+
+    store: new MongoStore({
+    mongoUrl: uri,
+    collectionName: "sessions",
+    ttl: 60 * 60 * 24 * 7, // 7 days (seconds)
+  }),
+
+    cookie: {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production", // must be true on HTTPS
+    maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days (ms)
+  }
   // store: new MongoStore({mongoUrl: 'mongodb://127.0.0.1:27017/lawDB',
   //                         ttl:14*60*1000}),
   // store: new MongoStore({mongoUrl: "mongodb+srv://consumerlaw:"+process.env.PASSWORDDB+"@consumerlaw.vfwut3x.mongodb.net/lawDB",
   //                         ttl:14*60*1000}),
-  cookie: {
-    //Expire Session after 1min.
-    maxAge: 1200000,
-  }
+  // cookie: {
+  //   //Expire Session after 1min.
+  //   maxAge: 1200000,
+  // }
 }));
 
 
@@ -73,10 +93,6 @@ app.use(passport.session());
 // Initialize Seesion end///////////>>>>>
 
 
-//   DB connection link
-// const uri = "mongodb://127.0.0.1:27017/topit";
-const uri = "mongodb+srv://Topit:"+process.env.MYMAINDBPASS+"@topit.qa7wgxv.mongodb.net/?retryWrites=true&w=majority&appName=topit";
-database().catch(err => console.log(err));
 
 
 // Async for DB connections ///////////////////////////////
@@ -481,7 +497,20 @@ app.get("/super-Admin", async (req, res) => {
 })
 
 
+app.get("/all-users",(req,res)=>{
+  if(!req.isAuthenticated()){
+    res.redirect("sign-in")
+  }{
+    if(req.user.isAdmin){
+     User.find({}).then((users)=>{
+       res.render("backend/dashboard/all-user-edit", { userInfo: req.user, users: users });
 
+     }).catch((err)=>{
+      res.send("Can't find Users", err)
+     })
+    }
+  }
+})
 
 
 

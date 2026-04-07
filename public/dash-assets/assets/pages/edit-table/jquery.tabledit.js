@@ -177,7 +177,7 @@ if (typeof jQuery === 'undefined') {
                         // Create delete button.
                         if (settings.deleteButton) {
                             deleteButton = '<button type="button" class="tabledit-delete-button ' + settings.buttons.delete.class + '" style="float: none;margin: 5px;">' + settings.buttons.delete.html + '</button>';
-                            confirmButton = '<button type="button" class="tabledit-confirm-button ' + settings.buttons.confirm.class + '" style="display: none; float: none;">' + settings.buttons.confirm.html + '</button>';
+                            // confirmButton = '<button type="button" class="tabledit-confirm-button ' + settings.buttons.confirm.class + '" style="display: none; float: none;">' + settings.buttons.confirm.html + '</button>';
                         }
 
                         // Create save button.

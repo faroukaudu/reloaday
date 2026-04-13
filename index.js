@@ -46,6 +46,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //setting Plugins for app 
 app.set('view engine', 'ejs');
+app.set('trust proxy', 1);
 app.use(express.static("public"));
 //setting Plugins for app
 

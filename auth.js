@@ -8,7 +8,7 @@ const https = require('https');
 
 
 app.get("/sign-in", (req,res)=>{
-    const toast = req.session.toaster;   // read
+    const toast = req.session.toaster || null;   // read
   delete req.session.toaster; //delete
   console.log("MY TOAST IS>>>>>>>",toast);
   
@@ -40,7 +40,7 @@ app.post("/login", (req,res)=>{
             failureRedirect:"/sign-in",
             failureMessage: true
           })(req,res, function(){
-            req.session.toast = {
+            req.session.toaster = {
               message: "User Login Successful",
               type: "success"
             };
@@ -111,7 +111,9 @@ app.get("/dashboard",(req,res)=>{
   if(req.isAuthenticated()){
     // console.log("My Toast is "+ JSON.stringify(req.session.toast));
     
-const toast = req.session.toast || null;  // ✅ copy first
+const toast = req.session.toaster || null;  // ✅ copy first
+console.log("MYY DASHBAORD TOAST", toast);
+
 delete req.session.toast; 
 
     res.render("backend/dashboard/userdash",{userInfo:req.user, deposit:req.user.transactions,toast});
@@ -181,8 +183,8 @@ app.post("/reset-password",(req,res)=>{
 
 
   app.post("/new-password",(req,res)=>{
-    const toast = req.session.toastA || null;  // ✅ copy first
-    delete req.session.toastA;
+    // const toast = req.session.toastA || null;  // ✅ copy first
+    // delete req.session.toastA;
     
     User.findById(req.body.userId).then((user)=>{
 
@@ -199,7 +201,6 @@ app.post("/reset-password",(req,res)=>{
 
           const toast = req.session.toaster || null;  // ✅ copy first
           delete req.session.toaster;
-          
 
           
             res.render("backend/auth/sign-in", {toast});

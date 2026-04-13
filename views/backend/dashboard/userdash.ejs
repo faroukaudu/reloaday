@@ -4,14 +4,14 @@
   <div class="pcoded-content">
     <div class="pcoded-inner-content">
       <div class="main-body">
-       
+
         <div class="page-wrapper">
-          
+
           <div class="page-body">
-            
+
             <div class="row">
-              
-              
+
+
 
               <!-- statustic-card start -->
               <div class="col-md-6 col-xl-4" style="margin-top: -5px;">
@@ -49,7 +49,7 @@
                 </div>
               </div>
 
-              
+
 
 
               <!-- statustic-card end -->
@@ -59,8 +59,9 @@
                 <div class="card">
                   <div class="card-header">
                     <h5>Activities</h5>
-                    <a onclick="createPin()" style="float: right;" class="btn btn-primary btn-outline-primary" href="#"><i class="feather icon-settings"></i> Change Transaction Pin </a>
-                     <!-- <button class="btn btn-primary btn-outline-primary"><i class="icofont icofont-user-alt-3">Chnage</i></button> -->
+                    <a onclick="createPin()" style="float: right;" class="btn btn-primary btn-outline-primary"
+                      href="#"><i class="feather icon-settings"></i> Change Transaction Pin </a>
+                    <!-- <button class="btn btn-primary btn-outline-primary"><i class="icofont icofont-user-alt-3">Chnage</i></button> -->
                   </div>
                   <div class="card-block">
                     <div class="dt-responsive table-responsive">
@@ -99,10 +100,10 @@
                     </div>
                   </div>
                 </div>
-                <!-- Zero config.table end -->
+                // !-- Zero config.table end -->
               </div>
 
-              <!-- income start -->
+              // -- income start -->
               <div class="col-sm-12">
                 <div class="card">
                   <div class="card-header">
@@ -152,15 +153,25 @@
                   </div>
                 </div>
               </div>
-              <!-- income end -->
 
-            </div><!-- /.row -->
-          </div><!-- /.page-body -->
-        </div><!-- /.page-wrapper -->
-      </div><!-- /.main-body -->
-    </div><!-- /.pcoded-inner-content -->
-  </div><!-- /.pcoded-content -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  </div>
+
+       <!-- ✅ TOAST (FIXED) -->
+      <script>
+        $(function () {
+          const toast = <% - JSON.stringify(toast || null) %>;
+          if (toast && typeof window.notify === "function") {
+            window.notify(toast.message, toast.type);
+          }
+        });
+      </script>
 
   <% if(!userInfo.trans_pin){ %>
     <script>
@@ -173,7 +184,7 @@
 
 
 
-      <!-- Required Jquery -->
+      // <!-- Required Jquery -->
       <script type="text/javascript" src="..\dash-assets\bower_components\jquery\js\jquery.min.js"></script>
       <script type="text/javascript" src="..\dash-assets\bower_components\jquery-ui\js\jquery-ui.min.js"></script>
       <script type="text/javascript" src="..\dash-assets\bower_components\popper.js\js\popper.min.js"></script>
@@ -189,21 +200,14 @@
 
       <!-- SweetAlert2 -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+      </link>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-      <!-- notifications -->
+    
       <script type="text/javascript" src="..\dash-assets\assets\js\bootstrap-growl.min.js"></script>
       <script type="text/javascript" src="..\dash-assets\assets\pages\notification\notification.js"></script>
 
-      <!-- ✅ TOAST (FIXED) -->
-      <script>
-        $(function () {
-          const toast = <% - JSON.stringify(toast || null) %>;
-          if (toast && typeof window.notify === "function") {
-            window.notify(toast.message, toast.type);
-          }
-        });
-      </script>
+ 
 
       <!-- Chart js -->
       <script type="text/javascript" src="..\dash-assets\bower_components\chart.js\js\Chart.js"></script>
